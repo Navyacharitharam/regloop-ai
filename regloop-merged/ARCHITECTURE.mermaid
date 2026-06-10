@@ -1,0 +1,74 @@
+graph TB
+    subgraph "Frontend — Next.js"
+        UI_Upload["Upload Workspace<br/>(FR-1)"]
+        UI_Obl["Obligations View<br/>(FR-2)"]
+        UI_Gap["Gap Analysis<br/>(FR-4)"]
+        UI_Review["Human Review<br/>(FR-6)"]
+        UI_Audit["Audit Trail<br/>(FR-7)"]
+        UI_Export["Export<br/>(FR-8)"]
+    end
+
+    subgraph "Backend — FastAPI"
+        direction TB
+        R_WS["/workspaces — Workspace CRUD"]
+        R_Docs["/documents — File Upload & Parse"]
+        R_Analysis["/analysis — AI Pipeline"]
+        R_Review["/prs — Review Workflow"]
+        R_Audit["/audit, /export — Audit & Export"]
+    end
+
+    subgraph "AI Layer — Anthropic Claude"
+        AI1["Obligation Extraction<br/>claude-opus-4-5"]
+        AI2["Policy Mapping<br/>claude-opus-4-5"]
+        AI3["Gap Analysis<br/>claude-opus-4-5"]
+        AI4["PR Generation<br/>claude-opus-4-5"]
+    end
+
+    subgraph "Data Layer — SQLite / PostgreSQL"
+        DB_WS[(workspaces)]
+        DB_Docs[(documents)]
+        DB_Obl[(obligations)]
+        DB_Map[(policy_mappings)]
+        DB_Gap[(gap_analyses)]
+        DB_PR[(policy_prs)]
+        DB_Audit[(audit_entries)]
+    end
+
+    subgraph "Document Processing"
+        PDF["PyPDF<br/>PDF Text Extraction"]
+        CSV["CSV Parser<br/>Responsibility Matrix"]
+    end
+
+    UI_Upload -->|Upload Files| R_Docs
+    UI_Upload -->|Start Analysis| R_Analysis
+    UI_Obl --> R_Analysis
+    UI_Gap --> R_Analysis
+    UI_Review -->|Approve/Reject/Modify| R_Review
+    UI_Audit --> R_Audit
+    UI_Export --> R_Audit
+
+    R_Docs --> PDF
+    R_Docs --> CSV
+    R_Docs --> DB_Docs
+
+    R_Analysis --> AI1
+    AI1 --> AI2
+    AI2 --> AI3
+    AI3 --> AI4
+
+    AI1 --> DB_Obl
+    AI2 --> DB_Map
+    AI3 --> DB_Gap
+    AI4 --> DB_PR
+
+    R_Analysis -->|Log every step| DB_Audit
+    R_Review -->|Log decisions| DB_Audit
+    R_Review --> DB_PR
+
+    DB_Obl --> R_Analysis
+    DB_Map --> R_Analysis
+
+    style AI1 fill:#0a1628,stroke:#00b4d8,color:#f0f4ff
+    style AI2 fill:#0a1628,stroke:#00b4d8,color:#f0f4ff
+    style AI3 fill:#0a1628,stroke:#00b4d8,color:#f0f4ff
+    style AI4 fill:#0a1628,stroke:#00b4d8,color:#f0f4ff
