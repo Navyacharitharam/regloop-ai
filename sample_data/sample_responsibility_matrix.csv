@@ -1,0 +1,11 @@
+role,team,email,domain
+Chief Data Protection Officer,Compliance,cdpo@acme.com,"Data Privacy, Governance"
+Chief Compliance Officer,Compliance,cco@acme.com,"Regulatory Compliance, Governance"
+Chief Information Security Officer,IT Security,ciso@acme.com,"Data Security, Breach Response, IT"
+Head of Data Engineering,Technology,data-eng@acme.com,"Encryption, Data Storage, Retention"
+VP Third-Party Risk,Risk Management,tprm@acme.com,"Vendor Management, Third-Party Risk"
+Head of Customer Operations,Customer Service,cust-ops@acme.com,"Customer Rights, Data Access Requests"
+General Counsel,Legal,legal@acme.com,"Legal Compliance, Contracts, DPAs"
+Director of Internal Audit,Audit,audit@acme.com,"Audit Trail, Reporting, Governance"
+Head of HR,Human Resources,hr@acme.com,"Training, Staff Compliance"
+Head of Procurement,Procurement,procurement@acme.com,"Vendor Onboarding, Contracts"

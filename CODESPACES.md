@@ -157,6 +157,24 @@ Sample files are in the `sample_data/` folder inside the Codespace.
 
 ---
 
+
+---
+
+## Running without a Gemini API key (demo / review mode)
+
+The app includes a complete set of realistic DORA fallback data — 14 obligations, 14 policy mappings, 8 gap analyses (Not Covered) + 6 (Partially Covered), and 14 policy PRs with specific before/after text. This triggers automatically when the Gemini API is unavailable.
+
+To run in fallback mode (no API key needed):
+
+```bash
+# In the backend terminal, set an invalid key so fallback triggers instantly
+echo "GEMINI_API_KEY=demo_mode_no_key" > /workspaces/regloop-ai/backend/.env
+echo "DATABASE_URL=sqlite+aiosqlite:///./regloop.db" >> /workspaces/regloop-ai/backend/.env
+```
+
+Then start the servers normally with `bash .devcontainer/start.sh` and run the full pipeline. All 14 obligations will be populated with realistic DORA compliance data within seconds, no quota limits, no waiting.
+
+
 ## Troubleshooting
 
 ### "Network Error" / CORS errors in browser

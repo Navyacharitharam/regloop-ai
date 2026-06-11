@@ -8,18 +8,16 @@
 
 ## Demo Video
 
-▶ **[Watch the 3–5 minute walkthrough →](YOUR_VIDEO_URL_HERE)**
+▶ **[Watch the 3–5 minute walkthrough →](YOUR_LOOM_URL_HERE)**
 
-> **For reviewers:** Record a Loom at https://loom.com (free) showing:
-> 1. Upload `sample_data/DORA_ICT_Risk_Update_2026.pdf` + 3 policy PDFs + CSV
-> 2. Click "Upload & Run" — watch all 4 pipeline stages complete automatically
-> 3. Navigate Obligations tab — expand an obligation to see mapping, gap, PR
-> 4. Review tab — approve 2 PRs, reject 1, escalate 1
-> 5. Audit Trail — show the full traceability timeline
-> 6. Export — download JSON and CSV
-> Replace `YOUR_VIDEO_URL_HERE` above with your Loom/YouTube link.
+> 📹 Replace `YOUR_LOOM_URL_HERE` with your Loom link before final submission.
 
-**Live demo:** YOUR_LIVE_URL_HERE *(see Hosting section below to deploy on Render)*
+
+**Live demo:** Run in GitHub Codespaces in under 60 seconds:
+```bash
+bash .devcontainer/start.sh
+```
+See [CODESPACES.md](./CODESPACES.md) for full instructions.
 
 ---
 
