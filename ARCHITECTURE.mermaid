@@ -1,0 +1,78 @@
+graph TB
+    subgraph "Frontend — Next.js 16"
+        UI_Home["Home — Workspace List"]
+        UI_Upload["Upload Workspace<br/>(FR-1)"]
+        UI_Obl["Obligations View<br/>(FR-2)"]
+        UI_Map["Policy Mapping<br/>(FR-3)"]
+        UI_Gap["Gap Analysis<br/>(FR-4)"]
+        UI_Review["Policy Pull Requests<br/>(FR-5 + FR-6)"]
+        UI_Audit["Audit Trail<br/>(FR-7)"]
+        UI_Export["Export<br/>(FR-8)"]
+    end
+
+    subgraph "Backend — FastAPI"
+        direction TB
+        R_Upload["/api/upload<br/>Session + file upload"]
+        R_Obl["/api/obligations<br/>Obligation extraction"]
+        R_Map["/api/mappings<br/>Policy mapping"]
+        R_Gap["/api/gaps<br/>Gap analysis"]
+        R_PR["/api/pullrequests<br/>PR generation"]
+        R_Review["/api/reviews<br/>Human review workflow"]
+        R_Audit["/api/audit<br/>Audit trail"]
+        R_Export["/api/export<br/>JSON + CSV export"]
+    end
+
+    subgraph "AI Layer — Gemini 2.0 Flash"
+        AI1["Stage 1: Obligation Extraction<br/>OBL-001 IDs · source · domain · confidence"]
+        AI2["Stage 2: Policy Mapping<br/>semantic match · excerpt · rationale"]
+        AI3["Stage 3: Gap Analysis<br/>Fully/Partially/Not Covered · risk · action"]
+        AI4["Stage 4: PR Generation<br/>before/after · owner · steps · effort"]
+    end
+
+    subgraph "Document Processing"
+        PDF["PyPDF — PDF Text Extraction"]
+        CSV_P["csv.DictReader — Responsibility Matrix"]
+    end
+
+    subgraph "Data Layer — SQLite (dev) / PostgreSQL (prod)"
+        DB[("7 tables:<br/>workspace_sessions · obligations<br/>policy_mappings · gap_analyses<br/>policy_pull_requests · review_decisions<br/>audit_records")]
+    end
+
+    UI_Home -->|"New Workspace"| UI_Upload
+    UI_Upload -->|"POST /api/upload/session"| R_Upload
+    R_Upload --> PDF
+    R_Upload --> CSV_P
+    R_Upload --> DB
+
+    UI_Upload -->|"Run Analysis"| R_Obl
+    R_Obl -->|"Gemini prompt 1"| AI1
+    AI1 --> DB
+    AI1 -->|"chain"| R_Map
+    R_Map -->|"Gemini prompt 2"| AI2
+    AI2 --> DB
+    AI2 -->|"chain"| R_Gap
+    R_Gap -->|"Gemini prompt 3"| AI3
+    AI3 --> DB
+    AI3 -->|"chain"| R_PR
+    R_PR -->|"Gemini prompt 4"| AI4
+    AI4 --> DB
+
+    UI_Obl -->|"GET /api/obligations/{sid}"| R_Obl
+    UI_Map -->|"GET /api/mappings/{sid}"| R_Map
+    UI_Gap -->|"GET /api/gaps/{sid}"| R_Gap
+    UI_Review -->|"GET /api/pullrequests/{sid}"| R_PR
+    UI_Review -->|"POST /api/reviews/{sid}/pr/{id}"| R_Review
+    R_Review --> DB
+    R_Review -->|"log decision"| R_Audit
+
+    UI_Audit -->|"GET /api/audit/{sid}/trail"| R_Audit
+    R_Audit --> DB
+
+    UI_Export -->|"GET /api/export/{sid}/json"| R_Export
+    UI_Export -->|"GET /api/export/{sid}/csv"| R_Export
+    R_Export --> DB
+
+    style AI1 fill:#0a1628,stroke:#00b4d8,color:#f0f4ff
+    style AI2 fill:#0a1628,stroke:#00b4d8,color:#f0f4ff
+    style AI3 fill:#0a1628,stroke:#00b4d8,color:#f0f4ff
+    style AI4 fill:#0a1628,stroke:#00b4d8,color:#f0f4ff
