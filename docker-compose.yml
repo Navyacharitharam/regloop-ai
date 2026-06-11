@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - DATABASE_URL=sqlite+aiosqlite:///./regloop.db
+    volumes:
+      - ./backend/regloop.db:/app/regloop.db
+    networks:
+      - internal
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+    security_opt:
+      - no-new-privileges:true
+    read_only: false   # uploads dir needs write; restrict in prod with tmpfs
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=http://backend:8000
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8000
+    depends_on:
+      - backend
+    networks:
+      - internal
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+
+networks:
+  internal:
+    driver: bridge

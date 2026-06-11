@@ -1,0 +1,128 @@
+{
+  "note": "Reference output provided by challenge reviewers. RegLoop should produce equivalent or more detailed results.",
+  "obligations": [
+    {
+      "id": "O1",
+      "obligation": "Maintain documented ICT risk management procedures",
+      "mappedPolicy": "ICT Risk Policy",
+      "coverage": "Partially Covered",
+      "risk": "Medium",
+      "gap": "Policy mentions a 'framework' but lacks documented procedures, specific scope, and mandatory language"
+    },
+    {
+      "id": "O2",
+      "obligation": "Identify critical ICT systems",
+      "mappedPolicy": "ICT Risk Policy",
+      "coverage": "Not Covered",
+      "risk": "High",
+      "gap": "No mention of identifying or classifying critical ICT systems"
+    },
+    {
+      "id": "O3",
+      "obligation": "Define ownership responsibilities for ICT risk",
+      "mappedPolicy": "ICT Risk Policy",
+      "coverage": "Partially Covered",
+      "risk": "Medium",
+      "gap": "ICT Risk Team is mentioned but ownership responsibilities are not formally defined"
+    },
+    {
+      "id": "O4",
+      "obligation": "Conduct annual ICT risk reviews",
+      "mappedPolicy": "ICT Risk Policy",
+      "coverage": "Partially Covered",
+      "risk": "High",
+      "gap": "Policy says 'periodically' — no annual frequency defined"
+    },
+    {
+      "id": "O5",
+      "obligation": "Maintain evidence of risk assessments",
+      "mappedPolicy": "ICT Risk Policy",
+      "coverage": "Partially Covered",
+      "risk": "Medium",
+      "gap": "Documentation 'should be retained whenever practical' — not mandatory, no retention period"
+    },
+    {
+      "id": "O6",
+      "obligation": "Document incident escalation procedures",
+      "mappedPolicy": "Incident Response Policy",
+      "coverage": "Not Covered",
+      "risk": "High",
+      "gap": "No escalation procedures defined in any policy"
+    },
+    {
+      "id": "O7",
+      "obligation": "Review critical ICT vendors at least annually",
+      "mappedPolicy": "Vendor Risk Policy",
+      "coverage": "Partially Covered",
+      "risk": "Medium",
+      "gap": "Review frequency not defined — 'periodically' does not satisfy annual requirement"
+    },
+    {
+      "id": "O8",
+      "obligation": "Maintain evidence of vendor assessments",
+      "mappedPolicy": "Vendor Risk Policy",
+      "coverage": "Not Covered",
+      "risk": "High",
+      "gap": "No evidence or documentation requirement mentioned in vendor policy"
+    },
+    {
+      "id": "O9",
+      "obligation": "Define vendor oversight ownership",
+      "mappedPolicy": "Vendor Risk Policy",
+      "coverage": "Not Covered",
+      "risk": "Medium",
+      "gap": "No named owner or responsible role defined for vendor oversight"
+    },
+    {
+      "id": "O10",
+      "obligation": "Establish vendor risk escalation procedures",
+      "mappedPolicy": "Vendor Risk Policy",
+      "coverage": "Partially Covered",
+      "risk": "Medium",
+      "gap": "Policy says concerns 'may be escalated when appropriate' — no defined escalation path or trigger"
+    },
+    {
+      "id": "O11",
+      "obligation": "Maintain documented incident response procedures",
+      "mappedPolicy": "Incident Response Policy",
+      "coverage": "Partially Covered",
+      "risk": "Medium",
+      "gap": "Policy says the organisation 'shall maintain an incident response process' but no procedures are documented"
+    },
+    {
+      "id": "O12",
+      "obligation": "Conduct annual incident-response testing",
+      "mappedPolicy": "Incident Response Policy",
+      "coverage": "Not Covered",
+      "risk": "High",
+      "gap": "No testing requirement mentioned anywhere in the incident response policy"
+    },
+    {
+      "id": "O13",
+      "obligation": "Preserve evidence of testing activities",
+      "mappedPolicy": "Incident Response Policy",
+      "coverage": "Not Covered",
+      "risk": "Medium",
+      "gap": "No evidence or record-keeping requirement for any testing activities"
+    },
+    {
+      "id": "O14",
+      "obligation": "Document post-incident reviews",
+      "mappedPolicy": "Incident Response Policy",
+      "coverage": "Partially Covered",
+      "risk": "Medium",
+      "gap": "Policy says 'lessons learned may be documented after major incidents' — not mandatory, not required for all incidents"
+    }
+  ],
+  "sample_pr": {
+    "pr_number": "001",
+    "regulatory_citation": "DORA ICT Risk Governance Requirements – Annual Risk Reviews",
+    "affected_policy": "Vendor Risk Policy",
+    "gap": "Review frequency is not defined.",
+    "current_text": "Critical vendors shall be periodically reviewed.",
+    "proposed_text": "Critical vendors shall be reviewed at least once every 12 months. Reviews shall assess security posture, operational resilience, and service availability. Evidence of each review shall be documented and retained for a minimum of three years. The Head of Vendor Risk (Procurement) is the accountable owner for ensuring reviews are completed on schedule.",
+    "suggested_owner": "Michael Johnson, Procurement",
+    "risk_level": "Medium",
+    "confidence": "92%"
+  }
+}
